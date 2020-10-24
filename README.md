@@ -26,4 +26,3 @@ latexmk sample.tex
 ```
 
 `sample.pdf`という実行ファイルができているはず。
-
