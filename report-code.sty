@@ -1,6 +1,6 @@
 \usepackage{listings}
 
-\renewcommand{\lstlistingname}{Code}
+% common settings -------------------------------------------------------------
 
 \lstset{ 
   basicstyle=\ttfamily\footnotesize,
@@ -9,7 +9,12 @@
   frame=single,
   keepspaces=true,
   showspaces=false,
+  showstringspaces=false,
 }
+
+\newcounter{oldlstlisting}
+
+% code ------------------------------------------------------------------------
 
 \lstdefinestyle{code}{
   numbers=left,
@@ -18,6 +23,44 @@
   keywordstyle=\bfseries,
 }
 
-\lstnewenvironment{code}[1][]{\lstset{style=code, #1}}{}
+\newcounter{code}
 
-\newcommand{\includecode}[2][]{\lstinputlisting[caption=#2, style=code, #1]{#2}}
+\lstnewenvironment{code}[1][]{
+  \renewcommand*{\lstlistingname}{Code}
+  \setcounter{oldlstlisting}{\value{lstlisting}}
+  \setcounter{lstlisting}{\value{code}}
+  \lstset{style=code, #1}
+}{
+  \stepcounter{code}
+  \setcounter{lstlisting}{\value{oldlstlisting}}
+}
+
+\newcommand{\includecode}[2][]{
+  \begin{@empty}
+    \renewcommand*{\lstlistingname}{Code}
+    \setcounter{oldlstlisting}{\value{lstlisting}}
+    \setcounter{lstlisting}{\value{code}}
+    \lstinputlisting[caption=#2, style=code, #1]{#2}
+    \stepcounter{code}
+    \setcounter{lstlisting}{\value{oldlstlisting}}
+  \end{@empty}
+}
+
+% command line ----------------------------------------------------------------
+
+\lstdefinestyle{commandline}{
+  frameround=tttt,
+  lineskip=0.75ex
+}
+
+\newcounter{commandline}
+
+\lstnewenvironment{commandline}[1][]{
+  \renewcommand*{\lstlistingname}{Command line}
+  \setcounter{oldlstlisting}{\value{lstlisting}}
+  \setcounter{lstlisting}{\value{commandline}}
+  \lstset{style=commandline, #1}
+}{
+  \stepcounter{commandline}
+  \setcounter{lstlisting}{\value{oldlstlisting}}
+}
