@@ -11,12 +11,13 @@
   showspaces=false,
 }
 
-\lstnewenvironment{code}[1][]{\
-  \lstset{
-    numbers=left,
-    numbersep=10pt,
-    commentstyle=\itshape,
-    keywordstyle=\bfseries,
-    #1
-  }
-}{}
+\lstdefinestyle{code}{
+  numbers=left,
+  numbersep=10pt,
+  commentstyle=\itshape,
+  keywordstyle=\bfseries,
+}
+
+\lstnewenvironment{code}[1][]{\lstset{style=code, #1}}{}
+
+\newcommand{\includecode}[2][]{\lstinputlisting[caption=#2, style=code, #1]{#2}}
