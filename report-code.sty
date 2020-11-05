@@ -1,0 +1,22 @@
+\usepackage{listings}
+
+\renewcommand{\lstlistingname}{Code}
+
+\lstset{ 
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  extendedchars=true,
+  frame=single,
+  keepspaces=true,
+  showspaces=false,
+}
+
+\lstnewenvironment{code}[1][]{\
+  \lstset{
+    numbers=left,
+    numbersep=10pt,
+    commentstyle=\itshape,
+    keywordstyle=\bfseries,
+    #1
+  }
+}{}
